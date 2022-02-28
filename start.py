@@ -3,11 +3,11 @@ from flask import request
 import socket
 import os
 
-server = os.environ("SERVER")
-port = int(os.environ("PORT"))
-nickname = os.environ("NICKNAME")
-token = os.environ("TOKEN")
-channel = os.environ("CHANEL")
+server = os.environ.get("SERVER")
+port = int(os.environ.get("PORT"))
+nickname = os.environ.get("NICKNAME")
+token = os.environ.get("TOKEN")
+channel = os.environ.get("CHANEL")
 
 sock = socket.socket()
 sock.connect((server, port))
