@@ -4,15 +4,10 @@ import socket
 import os
 
 server = os.environ.get("SERVER")
-print(server)
 port = int(os.environ.get("PORT"))
-print(port)
 nickname = os.environ.get("NICKNAME")
-print(nickname)
 token = os.environ.get("TOKEN")
-print(token)
 channel = os.environ.get("CHANEL")
-print(channel)
 
 sock = socket.socket()
 sock.connect((server, port))
@@ -20,7 +15,6 @@ sock.send(f"PASS {token}\n".encode('utf-8'))
 sock.send(f"NICK {nickname}\n".encode('utf-8'))
 resp = sock.recv(2048).decode('utf-8')
 sock.send(f"JOIN {channel}\n".encode('utf-8'))
-sock.recv(2048).decode('utf-8')
 sock.recv(2048).decode('utf-8')
 print("logged in")
 
