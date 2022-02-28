@@ -26,8 +26,6 @@ def hello_world():
 
 @app.route('/donation', methods=['POST'])
 def donation():
-    if sock is None:
-        connect()
     json_payload = request.json
     cents = int(json_payload['donation']['amount_in_cents'])
     message = json_payload['donation']['comment']
