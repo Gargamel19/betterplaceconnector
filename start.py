@@ -1,32 +1,25 @@
 from flask import Flask
 from flask import request
 import socket
+import os
 
-
-server = 'irc.chat.twitch.tv'
-port = 6667
-nickname = 'fettarmqp'
-token = 'oauth:h5j4vm7akv4ekgialq7s8hkkwsy262'
-channel = '#fettarmqp'
+server = os.getenv("SERVER")
+port = int(os.getenv("PORT"))
+nickname = os.getenv("NICKNAME")
+token = os.getenv("TOKEN")
+channel = os.getenv("CHANEL")
 
 sock = socket.socket()
 sock.connect((server, port))
 sock.send(f"PASS {token}\n".encode('utf-8'))
-print("PASS")
 sock.send(f"NICK {nickname}\n".encode('utf-8'))
-print("NICK")
 resp = sock.recv(2048).decode('utf-8')
-print(resp)
 sock.send(f"JOIN {channel}\n".encode('utf-8'))
-print("JOIN")
-resp = sock.recv(2048).decode('utf-8')
-print(resp)
-resp = sock.recv(2048).decode('utf-8')
-print(resp)
+sock.recv(2048).decode('utf-8')
+sock.recv(2048).decode('utf-8')
 print("logged in")
 
 app = Flask(__name__)
-
 
 
 @app.route('/', methods=['GET'])
@@ -40,11 +33,8 @@ def donation():
     cents = int(json_payload['donation']['amount_in_cents'])
     message = json_payload['donation']['comment']
     name = json_payload['donation']['donor_display_name']
-    sock.send(f"PRIVMSG {channel} :!tts {name} spendet {str(cents/100)} euro: {message}\n".encode('utf-8'))
+    sock.send(f"PRIVMSG {channel} :[Spende] {name} spendet {str(cents/100)} Euro: {message}\n".encode('utf-8'))
     return "okay"
 
 if __name__ == '__main__':
-
-
-
     app.run()
