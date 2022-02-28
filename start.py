@@ -3,6 +3,8 @@ from flask import request
 import socket
 import os
 
+app = Flask(__name__)
+
 server = os.environ.get("SERVER")
 port = int(os.environ.get("PORT"))
 nickname = os.environ.get("NICKNAME")
@@ -16,8 +18,6 @@ sock.send(f"NICK {nickname}\n".encode('utf-8'))
 sock.send(f"JOIN {channel}\n".encode('utf-8'))
 print("logged in")
 
-app = Flask(__name__)
-
 
 @app.route('/', methods=['GET'])
 def hello_world():
@@ -26,6 +26,8 @@ def hello_world():
 
 @app.route('/donation', methods=['POST'])
 def donation():
+    if sock is None:
+        connect()
     json_payload = request.json
     cents = int(json_payload['donation']['amount_in_cents'])
     message = json_payload['donation']['comment']
