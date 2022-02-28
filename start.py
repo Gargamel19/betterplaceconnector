@@ -30,8 +30,9 @@ def donation():
     cents = int(json_payload['donation']['amount_in_cents'])
     message = json_payload['donation']['comment']
     name = json_payload['donation']['donor_display_name']
-    sock.send(f"PRIVMSG {channel} :[Spenden] {name} spendet {str(cents/100)} Euro: {message}\n".encode('utf-8'))
+    sock.send(f"PRIVMSG {channel} :[Spende] {name} spendet {str(cents/100)} Euro: {message}\n".encode('utf-8'))
     return "okay"
+
 
 if __name__ == '__main__':
     app.run()
