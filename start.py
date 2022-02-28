@@ -15,13 +15,7 @@ sock = socket.socket()
 sock.connect((server, port))
 sock.send(f"PASS {token}\n".encode('utf-8'))
 sock.send(f"NICK {nickname}\n".encode('utf-8'))
-data = sock.recv(1900)
-print(data)
 sock.send(f"JOIN {channel}\n".encode('utf-8'))
-data = sock.recv(1900)
-print(data)
-data = sock.recv(1900)
-print(data)
 print("logged in")
 
 
