@@ -12,8 +12,13 @@ token = 'oauth:h5j4vm7akv4ekgialq7s8hkkwsy262'
 channel = '#fettarmqp'
 
 
-@app.route('/donation', methods=['POST'])
+@app.route('/', methods=['GET'])
 def hello_world():
+    return "Hello"
+
+
+@app.route('/donation', methods=['POST'])
+def donation():
     json_payload = request.json
     cents = int(json_payload['donation']['amount_in_cents'])
     message = json_payload['donation']['comment']
