@@ -4,10 +4,15 @@ import socket
 import os
 
 server = os.environ.get("SERVER")
+print(server)
 port = int(os.environ.get("PORT"))
+print(port)
 nickname = os.environ.get("NICKNAME")
+print(nickname)
 token = os.environ.get("TOKEN")
+print(token)
 channel = os.environ.get("CHANEL")
+print(channel)
 
 sock = socket.socket()
 sock.connect((server, port))
