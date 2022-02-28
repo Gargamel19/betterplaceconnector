@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 server = os.environ.get("SERVER")
 print(server)
-port = int(os.environ.get("PORT"))
+port = int(os.environ.get("PORT_SERVER"))
 print(port)
 nickname = os.environ.get("NICKNAME")
 print(nickname)
